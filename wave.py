@@ -22,20 +22,26 @@ plt.savefig("onda1.png")'''
 
 data = np.loadtxt("onda1.dat")
 
-plt.figure(figsize=(15,5))
+plt.figure(figsize=(24,5))
 plt.subplot(1,3,1)
-plt.imshow(data, aspect="auto")
-plt.xlabel("Indice x")
-plt.ylabel("Indice t")
-plt.title("Nx = 30   Ntc")
+plt.imshow(data*1E5, aspect="auto")
+plt.xlabel("x")
+plt.ylabel("t")
 plt.colorbar(label="$\psi$")
 
 n_datos_t = len(data[:,0])
 
 plt.subplot(1,3,2)
-for i in range(0,n_datos_t,n_datos_t//8):
-	leyenda = round(i*(1/n_datos_t),2)
-	plt.plot(data[i,:], label="t = " + str(leyenda))
+for i in range(0,n_datos_t,n_datos_t//10):
+	leyenda = round(i*(1/n_datos_t)/10,2)
+	plt.plot(1E5*data[i,:], label="t = " + str(leyenda))
 	plt.legend(loc='upper right')
+plt.xlabel("x")
+plt.ylabel("$\psi$")
+
+plt.subplot(1,3,3)
+plt.plot(1E5*data[:,25])
+plt.xlabel("t")
+plt.ylabel("$\psi$")
 
 plt.savefig("onda1.png")
